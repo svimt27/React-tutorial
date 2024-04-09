@@ -6,16 +6,18 @@ import { TodoProvider } from "./Context";
 function App() {
   const [todos, setTodos] = useState([]);
   const addTodo = (todo) => {
-    setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
+    setTodos((prev) => [
+      { id: Math.floor(Math.random() * 100), ...todo },
+      ...prev,
+    ]);
   };
-  const editTodo = (id, todo) => {
-    setTodos((prev) => prev.map((el) => (el.id === id ? todo : el)));
+  const updateTodo = (id, todo) => {
+    setTodos((prev) => prev.map((el) => (el.id === todo.id ? todo : el)));
   };
   const deleteTodo = (id) => {
-    console.log(id);
     setTodos((prev) => prev.filter((el) => el.id != id));
   };
-  const checkedTodo = (id) => {
+  const toggleComplete = (id) => {
     setTodos((prev) =>
       prev.map((el) =>
         el.id === id ? { ...el, completed: !el.completed } : el
@@ -34,7 +36,9 @@ function App() {
   }, [todos]);
 
   return (
-    <TodoProvider value={{ todos, addTodo, editTodo, deleteTodo, checkedTodo }}>
+    <TodoProvider
+      value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete }}
+    >
       <div className="bg-[#172842] min-h-screen py-8">
         <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
           <h1 className="text-2xl font-bold text-center mb-8 mt-2">
