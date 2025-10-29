@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useDebounce } from '../hooks/useDebounce';
 
-const SearchBar = () => {
+const SearchBar = ({onSearch}) => {
     const [search, setSearch] = useState('');
     const inputRef = useRef(null);
-    // const debouncedSearch = useDebounce(search, 300);
+    const debouncedSearch = useDebounce(search, 300);
 
-    // useEffect(() => {
-    //     onSearch(debouncedSearch);
-    // }, [debouncedSearch, onSearch]);
+    useEffect(() => {
+        onSearch(debouncedSearch);
+    }, [debouncedSearch, onSearch]);
 
     const handleClear = () => {
         setSearch('');

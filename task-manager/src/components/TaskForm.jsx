@@ -8,7 +8,7 @@ const TaskForm = ({ onSubmit, editingTask, onCancel }) => {
     priority: 'medium',
     category: 'work',
     assignee: ''
-  });
+})
 
   useEffect(() => {
     if (editingTask) {
@@ -19,7 +19,7 @@ const TaskForm = ({ onSubmit, editingTask, onCancel }) => {
   const handleSubmit = () => {
     if (!formData.title.trim()) return;
     onSubmit(formData);
-    setFormData({ title: '', description: '', priority: 'medium', category: 'work', assignee: '' });
+    setFormData({ title: '', description: '', priority: 'medium', category: 'work', assignee: '' });    
   };
 
   const handleChange = (field, value) => {

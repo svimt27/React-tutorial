@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 
 const TaskStats = ({tasks}) => {
     const stats = useMemo(() => {
-    console.log('Calculating stats...');
+    console.log('Calculating stats...',tasks);
     return {
       total: tasks.length,
       completed: tasks.filter(t => t.completed).length,
@@ -10,6 +10,8 @@ const TaskStats = ({tasks}) => {
       high: tasks.filter(t => t.priority === 'high' && !t.completed).length
     };
   }, [tasks]);
+  console.log('stats computed:', tasks);
+  
   return (
     <div className="grid grid-cols-4 gap-4 mb-6">
       <div className="bg-blue-100 p-4 rounded-lg">
